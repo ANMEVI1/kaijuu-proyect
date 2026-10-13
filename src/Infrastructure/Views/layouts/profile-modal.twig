@@ -1,0 +1,106 @@
+<!-- Profile Modal -->
+<div class="bolsa-modal" id="profile-modal" role="dialog" aria-modal="true" aria-label="Perfil del Guerrero">
+  <div class="bolsa-content profile-modal-content" style="max-width: 900px; width: 95%; background-color: var(--clr-bg); background-image: radial-gradient(rgba(0,0,0,0.3) 15%, transparent 16%), radial-gradient(rgba(0,0,0,0.3) 15%, transparent 16%); background-size: 20px 20px; background-position: 0 0, 10px 10px; border: 4px solid #000; box-shadow: 0 0 0 4px var(--clr-cyan), 10px 10px 0 rgba(0,0,0,0.8); display: flex; flex-direction: column; min-height: 600px; position: relative; margin: auto;">
+    
+    <!-- Close Button -->
+    <button class="bolsa-close profile-close-btn" id="profile-close-btn" aria-label="Cerrar modal" style="position: absolute; top: -20px; right: -20px; width: 50px; height: 50px; background: var(--clr-orange); border: 4px solid #000; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-family: var(--font-comic); font-size: 2rem; color: #000; box-shadow: 4px 4px 0 rgba(0,0,0,0.5); z-index: 100; cursor: pointer; padding: 0;">X</button>
+    
+    <!-- Header -->
+    <div style="display: flex; align-items: center; padding: 1rem 2rem; background: var(--clr-bg); border-bottom: 4px solid #000;">
+      <div style="width: 60px; height: 60px; border-radius: 50%; border: 3px solid #000; overflow: hidden; background: var(--clr-white); display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+        <img id="profile-avatar-header" src="https://ui-avatars.com/api/?name=Guerrero&background=random" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+      <h2 class="bolsa-title" style="font-size: 2.5rem; color: var(--clr-white); text-shadow: 2px 2px 0 var(--clr-red), -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 4px 4px 0 #000; margin: 0; transform: skewX(-5deg);">
+        MI PERFIL DE GUERRERO <span style="color: var(--clr-red); text-shadow: 2px 2px 0 var(--clr-white);">Z</span>
+      </h2>
+    </div>
+
+    <!-- Scrollable Content -->
+    <div style="padding: 1.5rem; overflow-y: auto; flex: 1;">
+      
+      <!-- CONTENIDO TABS: MIS DATOS -->
+      <div id="tab-datos" class="profile-tab-content">
+        <!-- Seccion: Resumen del Guerrero -->
+        <div class="profile-section-header">RESUMEN DEL GUERRERO</div>
+        <div style="display: flex; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap;">
+          <!-- Avatar Box -->
+          <div style="background: var(--clr-white); border: 4px solid #000; box-shadow: 6px 6px 0 rgba(0,0,0,0.5); width: 200px; display: flex; flex-direction: column; align-items: center; transform: skewX(-2deg);">
+            <div style="background: #000; color: var(--clr-white); width: 100%; text-align: center; font-family: var(--font-comic); font-size: 1.2rem; padding: 0.2rem 0; letter-spacing: 1px;" id="profile-username">Guerrero_01</div>
+            <div style="padding: 10px; width: 100%; height: 180px;">
+              <img id="profile-avatar-large" src="https://ui-avatars.com/api/?name=Guerrero&background=random" alt="Avatar Grande" style="width: 100%; height: 100%; object-fit: contain; border: 2px solid #000; background: var(--clr-orange);">
+            </div>
+          </div>
+
+          <!-- Datos Personales -->
+          <div style="flex: 1; background: transparent; display: flex; flex-direction: column; justify-content: center; min-width: 250px;">
+            <h3 style="font-family: var(--font-comic); font-size: 1.8rem; color: var(--clr-white); text-shadow: 2px 2px 0 #000; margin-bottom: 1rem; transform: skewX(-5deg);">DATOS PERSONALES</h3>
+            <ul style="list-style: none; padding: 0; margin: 0; font-family: var(--font-body); font-size: 1.1rem; color: var(--clr-white); font-weight: bold;">
+              <li style="margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px;"><span style="font-size: 1.5rem;">👤</span> Nombre Completo: <span id="profile-fullname" style="font-weight: normal; margin-left: 5px;">Cargando...</span></li>
+              <li style="margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px;"><span style="font-size: 1.5rem;">✉️</span> Correo Electrónico: <span id="profile-email" style="font-weight: normal; margin-left: 5px; color: var(--clr-yellow);">Cargando...</span></li>
+              <li style="margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px;"><span style="font-size: 1.5rem;">📅</span> Miembro Desde: <span style="font-weight: normal; margin-left: 5px;">Hoy</span></li>
+              <li style="margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px;"><span style="font-size: 1.5rem;">👑</span> Nivel de Guerrero: <span style="font-weight: normal; margin-left: 5px; color: var(--clr-cyan);">Saiyajin Novato</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENIDO TABS: COMPRAS (Oculto por defecto) -->
+      <div id="tab-compras" class="profile-tab-content" style="display: none;">
+        <!-- Seccion: Mis Pedidos Recientes -->
+        <div class="profile-section-header">MIS PEDIDOS RECIENTES</div>
+        <div style="background: var(--clr-white); border: 4px solid #000; padding: 2rem; text-align: center; font-family: var(--font-body); font-size: 1.2rem; font-weight: bold; transform: skewX(-2deg); margin-bottom: 2rem;">
+          <p>Próximamente podrás ver tu historial de compras aquí.</p>
+        </div>
+      </div>
+      
+      <!-- CONTENIDO TABS: DESEOS (Oculto por defecto) -->
+      <div id="tab-deseos" class="profile-tab-content" style="display: none;">
+        <div class="profile-section-header">LISTA DE DESEOS</div>
+        <div style="background: var(--clr-white); border: 4px solid #000; padding: 2rem; text-align: center; font-family: var(--font-body); font-size: 1.2rem; font-weight: bold; transform: skewX(-2deg); margin-bottom: 2rem;">
+          <p>¡Próximamente podrás guardar tus productos favoritos!</p>
+        </div>
+      </div>
+      
+      <!-- CONTENIDO TABS: Z-POINTS (Oculto por defecto) -->
+      <div id="tab-zpoints" class="profile-tab-content" style="display: none;">
+        <div class="profile-section-header">MIS Z-POINTS</div>
+        <div style="background: var(--clr-white); border: 4px solid #000; padding: 2rem; text-align: center; font-family: var(--font-body); font-size: 1.2rem; font-weight: bold; transform: skewX(-2deg); margin-bottom: 2rem;">
+          <p>¡Próximamente acumularás puntos Zeni con tus compras!</p>
+        </div>
+      </div>
+
+      <!-- CONTENIDO TABS: MONEDERO (Oculto por defecto) -->
+      <div id="tab-monedero" class="profile-tab-content" style="display: none;">
+        <div class="profile-section-header">MI MONEDERO ZEN</div>
+        <div style="background: var(--clr-white); border: 4px solid #000; padding: 2rem; text-align: center; font-family: var(--font-body); font-size: 1.2rem; font-weight: bold; transform: skewX(-2deg); margin-bottom: 2rem;">
+          <p style="font-family: var(--font-comic); font-size: 1.5rem; margin: 0; color: #000;">
+            SALDO ACTUAL: <span id="profile-zen-balance" style="color: var(--clr-red); font-size: 2.5rem; text-shadow: 2px 2px 0 var(--clr-yellow);">0.00</span> ZEN
+          </p>
+          <div style="margin-top: 1.5rem;">
+            <a href="/monedero" class="btn-comic btn-comic--green" style="font-size: 1.2rem; text-decoration: none; display: inline-block;">🪙 IR AL MONEDERO Y RECARGAR</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs Inferiores -->
+      <div style="display: flex; gap: 10px; background: var(--clr-white); border: 4px solid #000; padding: 10px; box-shadow: 4px 4px 0 rgba(0,0,0,0.5); transform: skewX(-5deg); margin-bottom: 2rem; overflow-x: auto;">
+        <button class="profile-tab active" data-target="tab-datos">[MIS DATOS]</button>
+        <button class="profile-tab" data-target="tab-monedero">[MONEDERO ZEN]</button>
+        <button class="profile-tab" data-target="tab-compras">[COMPRAS]</button>
+        <button class="profile-tab" data-target="tab-deseos">[LISTA DE DESEOS]</button>
+        <button class="profile-tab" data-target="tab-zpoints">[Z-POINTS]</button>
+      </div>
+
+      <!-- Botones de Accion -->
+      <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+        <button id="btn-edit-profile" class="btn-comic" style="background: var(--clr-orange); font-size: 1.5rem; transform: skewX(-10deg);">
+          <span>EDITAR PERFIL</span>
+        </button>
+        <button id="profile-logout-btn" class="btn-comic" style="background: var(--clr-red); font-size: 1.5rem; transform: skewX(-10deg);">
+          <span>CERRAR SESIÓN</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

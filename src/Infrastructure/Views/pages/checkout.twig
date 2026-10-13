@@ -1,0 +1,108 @@
+{% extends 'layouts/base.twig' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<section class="section checkout-page" id="checkout-page">
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">Checkout <span class="gradient-text">Seguro</span></h1>
+    </div>
+
+    <!-- Steps indicator -->
+    <div class="checkout-steps" id="checkout-steps" aria-label="Pasos del checkout">
+      <div class="step step--active" data-step="1">1 · Datos</div>
+      <div class="step" data-step="2">2 · Envío</div>
+      <div class="step" data-step="3">3 · Pago</div>
+    </div>
+
+    <div class="checkout__grid">
+      <!-- Formulario -->
+      <form
+        class="checkout-form"
+        id="checkout-form"
+        method="post"
+        action="/checkout/procesar"
+        novalidate
+      >
+        <!-- Datos personales -->
+        <fieldset class="form-group" id="step-1">
+          <legend>Datos Personales</legend>
+          <div class="form-row">
+            <label for="c-name">Nombre completo</label>
+            <input type="text" id="c-name" name="customer_name" required autocomplete="name"/>
+          </div>
+          <div class="form-row">
+            <label for="c-email">Correo electrónico</label>
+            <input type="email" id="c-email" name="customer_email" required autocomplete="email"/>
+          </div>
+          <div class="form-row">
+            <label for="c-phone">Teléfono</label>
+            <input type="tel" id="c-phone" name="customer_phone" autocomplete="tel"/>
+          </div>
+        </fieldset>
+
+        <!-- Dirección de envío -->
+        <fieldset class="form-group" id="step-2">
+          <legend>Dirección de Envío</legend>
+          <div class="form-row">
+            <label for="c-address">Dirección</label>
+            <input type="text" id="c-address" name="address" required autocomplete="street-address"/>
+          </div>
+          <div class="form-row form-row--2col">
+            <div>
+              <label for="c-city">Ciudad</label>
+              <input type="text" id="c-city" name="city" required autocomplete="address-level2"/>
+            </div>
+            <div>
+              <label for="c-zip">Código postal</label>
+              <input type="text" id="c-zip" name="zip" autocomplete="postal-code"/>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Método de pago -->
+        <fieldset class="form-group" id="step-3">
+          <legend>Método de Pago</legend>
+          <div class="payment-methods">
+            <label class="payment-option">
+              <input type="radio" name="payment_method" value="zen_wallet" id="pay-zen" checked/>
+              <span class="payment-option__label">🪙 Monedero ZEN (<span id="checkout-zen-balance">0.00 ZEN</span>)</span>
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="payment_method" value="paypal" id="pay-paypal"/>
+              <span class="payment-option__label">PayPal</span>
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="payment_method" value="mercadopago" id="pay-mp"/>
+              <span class="payment-option__label">Mercado Pago</span>
+            </label>
+          </div>
+          <!-- Token oculto generado por JS del carrito -->
+          <input type="hidden" name="cart_items" id="cart-items-input"/>
+          <input type="hidden" name="total" id="checkout-total-input"/>
+        </fieldset>
+
+        <button type="submit" class="btn btn--primary btn--lg btn--full" id="submit-order-btn">
+          🔒 Confirmar Pedido
+        </button>
+      </form>
+
+      <!-- Resumen -->
+      <aside class="checkout-summary" id="checkout-summary" aria-label="Resumen del pedido">
+        <h2>Tu Pedido</h2>
+        <div class="summary-items" id="checkout-summary-items">
+          <!-- Poblado por checkout.js -->
+        </div>
+        <div class="summary-row summary-row--total">
+          <span>Total</span>
+          <strong id="checkout-display-total">$0.00</strong>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="/assets/js/pages/checkout.js"></script>
+{% endblock %}

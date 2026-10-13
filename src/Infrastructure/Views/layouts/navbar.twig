@@ -1,0 +1,48 @@
+<nav class="navbar" id="navbar" role="navigation" aria-label="Navegación principal">
+  <div class="container navbar__container">
+
+    <!-- Logo -->
+    <a href="/" class="navbar__logo-sticker" aria-label="KAIJUU STORE — Inicio">
+      <img src="/assets/img/logo-kaijuu.jpeg" alt="Kaijuu Store Logo" style="height: 60px; object-fit: contain; mix-blend-mode: multiply;">
+    </a>
+
+    <!-- Search -->
+    <div class="navbar__search-container">
+      <form action="/buscar" method="get" class="navbar__search" role="search">
+        <input type="search" name="q" id="search-input" placeholder="¡BUSCA TU POWER UP! ⚡" autocomplete="off" aria-label="Buscar"/>
+        <button type="submit" aria-label="Enviar búsqueda">
+          <svg fill="white" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        </button>
+      </form>
+    </div>
+
+    <!-- Actions -->
+    <div class="navbar__actions">
+      <!-- Monedero Badge -->
+      <a href="/monedero" id="nav-zen-badge" class="btn-comic" style="background: var(--clr-yellow); color: #000; text-decoration: none; padding: 4px 12px; font-size: 1rem; margin-right: 8px; display: none; align-items: center; gap: 6px; transform: skewX(-5deg); border: 2px solid #000; box-shadow: 2px 2px 0 #000;">
+        <span>🪙</span> <span id="nav-zen-balance">0.00</span> ZEN
+      </a>
+      <!-- Perfil -->
+      <button id="btn-navbar-profile" class="nav-action-btn" style="background: transparent; border: none; cursor: pointer; font-family: var(--font-comic); font-size: 1rem; color: var(--clr-white);">
+        <img id="nav-avatar-img" src="https://ui-avatars.com/api/?name=Invitado&background=000&color=fff" alt="Avatar" style="border-radius: 50%; border: 2px solid #000; width: 40px; height: 40px; object-fit: cover;">
+        <span id="nav-avatar-name" style="text-shadow: 1px 1px 0 #000;">ENTRAR</span>
+      </button>
+      <!-- Carrito -->
+      <button class="nav-action-btn" id="cart-toggle-btn">
+        <div class="icon-placeholder" style="display:flex;align-items:center;justify-content:center; position: relative;">
+          <svg style="width:24px" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          <span id="cart-count" style="display: none; position: absolute; top: -8px; right: -8px; background: var(--clr-red); color: white; border: 2px solid #000; border-radius: 50%; min-width: 20px; height: 20px; font-family: var(--font-comic); font-size: 0.8rem; font-weight: bold; align-items: center; justify-content: center; box-shadow: 2px 2px 0 #000;">0</span>
+        </div>
+        <span>CART</span>
+      </button>
+      <!-- Menú -->
+      <button class="nav-action-btn" id="hamburger-btn">
+        <div class="icon-placeholder" style="display:flex;align-items:center;justify-content:center;">
+          <svg style="width:24px" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+        </div>
+        <span>MENU</span>
+      </button>
+    </div>
+
+  </div>
+</nav>

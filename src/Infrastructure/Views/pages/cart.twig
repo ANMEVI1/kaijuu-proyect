@@ -1,0 +1,38 @@
+{% extends 'layouts/base.twig' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<section class="section cart-page" id="cart-page">
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">🛒 Tu <span class="gradient-text">Carrito</span></h1>
+    </div>
+    <div class="cart-page__grid" id="cart-page-grid">
+      <!-- Renderizado por cart.js -->
+      <div class="cart-page__items" id="cart-page-items">
+        <p class="empty-state" id="cart-empty-msg">Tu carrito está vacío.</p>
+      </div>
+      <aside class="cart-page__summary" id="cart-summary" aria-label="Resumen del pedido">
+        <h2>Resumen</h2>
+        <div class="summary-row">
+          <span>Subtotal</span><span id="summary-subtotal">$0.00</span>
+        </div>
+        <div class="summary-row">
+          <span>Envío</span><span>Calculado al hacer checkout</span>
+        </div>
+        <div class="summary-row summary-row--total">
+          <span>Total</span><span id="summary-total">$0.00</span>
+        </div>
+        <a href="/checkout" class="btn btn--primary btn--full" id="go-checkout-btn">
+          Proceder al Checkout →
+        </a>
+        <a href="/catalogo" class="btn btn--ghost btn--full">Seguir Comprando</a>
+      </aside>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="/assets/js/pages/cart-page.js"></script>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'layouts/base.twig' %}
+
+{% block content %}
+<div class="admin-layout" style="background: var(--clr-bg); font-family: var(--font-body); position: relative; z-index: 9999;">
+  
+  <aside class="admin-sidebar">
+    <h2 style="font-family: var(--font-comic); font-size: 2rem; color: var(--clr-yellow); text-shadow: 2px 2px 0 var(--clr-red); transform: skewX(-5deg); margin-bottom: 2rem; text-align: center; letter-spacing: 2px;">PANEL ADMIN</h2>
+    
+    <nav style="display: flex; flex-direction: column; gap: 1rem;">
+      <a href="/admin" class="btn-comic" style="background: var(--clr-white); color: #000; text-shadow: none; width: 100%; font-size: 1.2rem; display: block; text-align: center; text-decoration: none;">📊 DASHBOARD</a>
+      <a href="/admin/productos" class="btn-comic" style="background: var(--clr-white); color: #000; text-shadow: none; width: 100%; font-size: 1.2rem; display: block; text-align: center; text-decoration: none;">📦 PRODUCTOS</a>
+      <a href="/admin/categorias" class="btn-comic" style="background: var(--clr-white); color: #000; text-shadow: none; width: 100%; font-size: 1.2rem; display: block; text-align: center; text-decoration: none;">🏷️ CATEGORÍAS</a>
+      <a href="/admin/pedidos" class="btn-comic" style="background: var(--clr-white); color: #000; text-shadow: none; width: 100%; font-size: 1.2rem; display: block; text-align: center; text-decoration: none;">🛒 PEDIDOS</a>
+      <a href="/admin/usuarios" class="btn-comic" style="background: var(--clr-white); color: #000; text-shadow: none; width: 100%; font-size: 1.2rem; display: block; text-align: center; text-decoration: none;">👥 USUARIOS</a>
+      <a href="/admin/monedero" class="btn-comic" style="background: var(--clr-cyan); color: #000; text-shadow: none; width: 100%; font-size: 1.2rem; display: block; text-align: center; text-decoration: none;">🪙 MONEDERO ZEN</a>
+    </nav>
+    <div class="mt-auto" style="margin-top: auto;">
+      <a href="/" class="btn-comic" style="background: var(--clr-red); width: 100%; font-size: 1rem; display: block; text-align: center; text-decoration: none;">🚪 VOLVER A TIENDA</a>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 2rem; background: var(--clr-white); border: 4px solid #000; box-shadow: 6px 6px 0 rgba(0,0,0,0.5); padding: 1.5rem; transform: skewX(-1deg);">
+        <h1 style="font-family: var(--font-comic); font-size: 2.5rem; color: #000; margin: 0; line-height: 1;">ADMINISTRACIÓN ZEN</h1>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+        
+        <!-- Tipo de Cambio -->
+        <div style="background: var(--clr-white); border: 4px solid #000; box-shadow: 6px 6px 0 rgba(0,0,0,0.5); padding: 1.5rem;">
+            <h2 style="font-family: var(--font-comic); font-size: 1.5rem; margin-top: 0;">TIPO DE CAMBIO</h2>
+            <div style="font-size: 1.2rem; margin-bottom: 1rem;">
+                Actual: <strong>1 ZEN = S/ {{ rate ? rate.rate|number_format(2) : '3.50' }}</strong>
+            </div>
+            
+            <form method="POST" action="/admin/monedero/tipo-cambio">
+                <label style="display: block; font-weight: bold; margin-bottom: 5px;">Nuevo valor (PEN):</label>
+                <div style="display: flex; gap: 10px;">
+                    <input type="number" name="rate" step="0.0001" value="{{ rate ? rate.rate : '3.50' }}" required style="padding: 10px; border: 2px solid #000; flex: 1;">
+                    <button type="submit" class="btn-comic btn-comic--green" style="padding: 10px 20px;">ACTUALIZAR</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Ajuste Manual -->
+        <div style="background: var(--clr-white); border: 4px solid #000; box-shadow: 6px 6px 0 rgba(0,0,0,0.5); padding: 1.5rem;">
+            <h2 style="font-family: var(--font-comic); font-size: 1.5rem; margin-top: 0;">AJUSTE MANUAL</h2>
+            <form method="POST" action="/admin/monedero/ajuste">
+                <div style="margin-bottom: 10px;">
+                    <label style="display: block; font-weight: bold; margin-bottom: 5px;">User ID (UUID):</label>
+                    <input type="text" name="user_id" required style="width: 100%; padding: 8px; border: 2px solid #000;">
+                </div>
+                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                    <div style="flex: 1;">
+                        <label style="display: block; font-weight: bold; margin-bottom: 5px;">Monto ZEN:</label>
+                        <input type="number" name="amount_zen" step="0.01" min="0.01" required style="width: 100%; padding: 8px; border: 2px solid #000;">
+                    </div>
+                    <div style="flex: 1;">
+                        <label style="display: block; font-weight: bold; margin-bottom: 5px;">Operación:</label>
+                        <select name="direction" required style="width: 100%; padding: 8px; border: 2px solid #000;">
+                            <option value="credito">Abonar (+)</option>
+                            <option value="debito">Descontar (-)</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label style="display: block; font-weight: bold; margin-bottom: 5px;">Nota / Motivo:</label>
+                    <input type="text" name="notes" required style="width: 100%; padding: 8px; border: 2px solid #000;">
+                </div>
+                <button type="submit" class="btn-comic" style="background: var(--clr-yellow); width: 100%;">EJECUTAR AJUSTE</button>
+            </form>
+        </div>
+
+      </div>
+
+  </main>
+</div>
+{% endblock %}

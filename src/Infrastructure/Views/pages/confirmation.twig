@@ -1,0 +1,27 @@
+{% extends 'layouts/base.twig' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<section class="section confirmation-page" id="confirmation-page">
+  <div class="container confirmation-page__inner">
+    <div class="confirmation-card" id="confirmation-card">
+      <div class="confirmation-icon" id="confirmation-icon">✅</div>
+      <h1 class="confirmation-title">¡Pedido Confirmado!</h1>
+      <p class="confirmation-subtitle">
+        Gracias por tu compra. Tu pedido <strong>#{{ orderId }}</strong> ha sido recibido.
+      </p>
+      <p class="confirmation-note">
+        Recibirás un correo con el seguimiento de tu pedido en breve.
+      </p>
+      <div class="confirmation-actions">
+        <a href="/catalogo" class="btn btn--primary btn--lg">Seguir Comprando</a>
+        <a href="/" class="btn btn--ghost btn--lg">Ir al Inicio</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="/assets/js/pages/confirmation.js"></script>
+{% endblock %}

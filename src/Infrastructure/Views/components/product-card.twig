@@ -1,0 +1,39 @@
+<article
+  class="product-card"
+  data-id="{{ product.id }}"
+  data-price="{{ product.price }}"
+>
+  <!-- Nombre arriba -->
+  <div class="product-card__title-top">
+    {{ product.name }}
+  </div>
+
+  <!-- Imagen -->
+  <a href="/catalogo/{{ product.slug }}" class="product-card__img-wrap" tabindex="-1">
+    <img
+      src="{{ product.imageUrl|default('https://placehold.co/400x400/000000/FFFFFF?text=Sin+Imagen') }}"
+      alt="{{ product.name }}"
+      loading="lazy"
+    />
+  </a>
+
+  <!-- Info abajo -->
+  <div class="product-card__name-bottom">
+    {{ product.description|slice(0, 40) ~ '...' }}
+  </div>
+  <div class="product-card__price">
+    {{ product.price|number_format(0) }} Zeni
+  </div>
+
+  <!-- Botón -->
+  <button
+    class="btn-comic add-cart-btn"
+    data-id="{{ product.id }}"
+    data-name="{{ product.name }}"
+    data-price="{{ product.price }}"
+    data-image="{{ product.imageUrl }}"
+    {% if not product.isInStock() %}disabled aria-disabled="true"{% endif %}
+  >
+    <span>¡AÑADIR AL CARRITO!</span>
+  </button>
+</article>

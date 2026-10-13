@@ -1,0 +1,64 @@
+{% extends 'layouts/base.twig' %}
+
+{% block content %}
+<div class="admin-layout" style="background: var(--clr-bg); font-family: var(--font-body); position: relative; z-index: 9999;">
+  
+  <!-- Admin Sidebar -->
+  <aside class="admin-sidebar">
+    <h2 style="font-family: var(--font-comic); font-size: 2rem; color: var(--clr-yellow); text-shadow: 2px 2px 0 var(--clr-red); transform: skewX(-5deg); margin-bottom: 2rem; text-align: center; letter-spacing: 2px;">PANEL ADMIN</h2>
+    
+    <nav style="display: flex; flex-direction: column; gap: 1rem;">
+      <a href="/admin" class="btn-comic" style="background: var(--clr-white); color: #000; text-shadow: none; width: 100%; font-size: 1.2rem; display: block; text-align: center; text-decoration: none;">📊 DASHBOARD</a>
+      <a href="/admin/productos" class="btn-comic" style="background: var(--clr-white); color: #000; text-shadow: none; width: 100%; font-size: 1.2rem; display: block; text-align: center; text-decoration: none;">📦 PRODUCTOS</a>
+      <a href="/admin/pedidos" class="btn-comic" style="background: var(--clr-white); color: #000; text-shadow: none; width: 100%; font-size: 1.2rem; display: block; text-align: center; text-decoration: none;">🛒 PEDIDOS</a>
+      <a href="/admin/usuarios" class="btn-comic" style="background: var(--clr-cyan); width: 100%; font-size: 1.2rem; display: block; text-align: center; text-decoration: none;">👥 USUARIOS</a>
+    </nav>
+
+    <div class="mt-auto" style="margin-top: auto;">
+      <a href="/" class="btn-comic" style="background: var(--clr-red); width: 100%; font-size: 1rem; display: block; text-align: center; text-decoration: none;">🚪 VOLVER A TIENDA</a>
+    </div>
+  </aside>
+
+  <!-- Admin Main Content -->
+  <main class="admin-main">
+      
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 2rem; background: var(--clr-white); border: 4px solid #000; box-shadow: 6px 6px 0 rgba(0,0,0,0.5); padding: 1.5rem; transform: skewX(-1deg);">
+        <h1 style="font-family: var(--font-comic); font-size: 2.5rem; color: #000; margin: 0; line-height: 1;">{{ user ? 'EDITAR USUARIO' : 'NUEVO USUARIO' }}</h1>
+        <a href="/admin/usuarios" class="btn-comic" style="background: var(--clr-red); width: auto; text-decoration: none;"><span>❌ CANCELAR</span></a>
+      </div>
+
+      <!-- User Form -->
+      <div style="background: var(--clr-white); border: 4px solid #000; box-shadow: 6px 6px 0 rgba(0,0,0,0.5); padding: 2rem; transform: skewX(-1deg);">
+        <form action="{{ user ? '/admin/usuarios/' ~ user.id ~ '/editar' : '/admin/usuarios/nuevo' }}" method="POST" style="display: flex; flex-direction: column; gap: 1.5rem;">
+          
+          <div>
+            <label style="font-family: var(--font-comic); font-size: 1.2rem; display: block; margin-bottom: 0.5rem;">Correo Electrónico:</label>
+            <input type="email" name="email" value="{{ user.email }}" required style="width: 100%; padding: 0.8rem; border: 2px solid #000; font-family: var(--font-body); font-size: 1rem;">
+          </div>
+          
+          <div>
+            <label style="font-family: var(--font-comic); font-size: 1.2rem; display: block; margin-bottom: 0.5rem;">Contraseña {{ user ? '(Dejar en blanco para no cambiar)' : '' }}:</label>
+            <input type="password" name="password" {{ user ? '' : 'required' }} style="width: 100%; padding: 0.8rem; border: 2px solid #000; font-family: var(--font-body); font-size: 1rem;">
+          </div>
+
+          <div>
+            <label style="font-family: var(--font-comic); font-size: 1.2rem; display: block; margin-bottom: 0.5rem;">Rol (Por defecto el backend ignora si no hay columna):</label>
+            <select name="role" style="width: 100%; padding: 0.8rem; border: 2px solid #000; font-family: var(--font-body); font-size: 1rem;">
+              <option value="customer" {{ user.role == 'customer' ? 'selected' : '' }}>Cliente</option>
+              <option value="admin" {{ user.role == 'admin' ? 'selected' : '' }}>Administrador</option>
+            </select>
+            <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">*Nota: La tabla 'users' original de Supabase auth no siempre tiene rol público, el schema indica role text.</p>
+          </div>
+
+          <div style="margin-top: 1rem;">
+            <button type="submit" class="btn-comic btn-comic--green" style="font-size: 1.5rem; padding: 1rem; width: 100%;">
+              <span>{{ user ? '💾 GUARDAR CAMBIOS' : '🚀 CREAR USUARIO' }}</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+    </main>
+</div>
+{% endblock %}

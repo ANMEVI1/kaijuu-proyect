@@ -1,0 +1,82 @@
+{% extends 'layouts/base.twig' %}
+
+{% block content %}
+<div class="admin-layout" style="background: var(--clr-bg); font-family: var(--font-body); position: relative; z-index: 9999;">
+  
+  <!-- Admin Sidebar -->
+  <aside class="admin-sidebar">
+    <h2 style="font-family: var(--font-comic); font-size: 2rem; color: var(--clr-yellow); text-shadow: 2px 2px 0 var(--clr-red); transform: skewX(-5deg); margin-bottom: 2rem; text-align: center; letter-spacing: 2px;">PANEL ADMIN</h2>
+    
+    <nav style="display: flex; flex-direction: column; gap: 1rem;">
+      <a href="/admin" class="btn-comic" style="background: var(--clr-white); color: #000; text-shadow: none; width: 100%; font-size: 1.2rem; display: block; text-align: center; text-decoration: none;">📊 DASHBOARD</a>
+      <a href="/admin/productos" class="btn-comic" style="background: var(--clr-cyan); width: 100%; font-size: 1.2rem; display: block; text-align: center; text-decoration: none;">📦 PRODUCTOS</a>
+      <a href="/admin/pedidos" class="btn-comic" style="background: var(--clr-white); color: #000; text-shadow: none; width: 100%; font-size: 1.2rem; display: block; text-align: center; text-decoration: none;">🛒 PEDIDOS</a>
+      <a href="/admin/usuarios" class="btn-comic" style="background: var(--clr-white); color: #000; text-shadow: none; width: 100%; font-size: 1.2rem; display: block; text-align: center; text-decoration: none;">👥 USUARIOS</a>
+    </nav>
+
+    <div class="mt-auto" style="margin-top: auto;">
+      <a href="/" class="btn-comic" style="background: var(--clr-red); width: 100%; font-size: 1rem; display: block; text-align: center; text-decoration: none;">🚪 VOLVER A TIENDA</a>
+    </div>
+  </aside>
+
+  <!-- Admin Main Content -->
+  <main class="admin-main">
+      
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 2rem; background: var(--clr-white); border: 4px solid #000; box-shadow: 6px 6px 0 rgba(0,0,0,0.5); padding: 1.5rem; transform: skewX(-1deg);">
+        <h1 style="font-family: var(--font-comic); font-size: 2.5rem; color: #000; margin: 0; line-height: 1;">{{ product ? 'EDITAR PRODUCTO' : 'NUEVO PODER' }}</h1>
+        <a href="/admin/productos" class="btn-comic" style="background: var(--clr-red); color: #fff; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; gap: 10px; width: auto; padding: 10px 20px; text-decoration: none; text-shadow: 2px 2px 0 #000;">
+          VOLVER
+        </a>
+      </div>
+
+      <div style="background: var(--clr-white); border: 4px solid #000; box-shadow: 6px 6px 0 rgba(0,0,0,0.5); padding: 2rem; transform: skewX(-1deg);">
+        <form method="POST" action="{{ product ? '/admin/productos/' ~ product.id ~ '/editar' : '/admin/productos/nuevo' }}" style="display: flex; flex-direction: column; gap: 1.5rem; font-family: var(--font-body); font-weight: bold;">
+          
+          <div>
+            <label style="font-size: 1.2rem;">Nombre del Producto</label>
+            <input type="text" name="name" value="{{ product.name ?? '' }}" required style="width: 100%; padding: 12px; border: 3px solid #000; font-family: var(--font-body); margin-top: 5px; font-size: 1.1rem;">
+          </div>
+          
+          <div>
+            <label style="font-size: 1.2rem;">Descripción</label>
+            <textarea name="description" required style="width: 100%; padding: 12px; border: 3px solid #000; font-family: var(--font-body); margin-top: 5px; font-size: 1.1rem; min-height: 100px;">{{ product.description ?? '' }}</textarea>
+          </div>
+          
+          <div style="display: flex; flex-wrap: wrap; gap: 1.5rem;">
+            <div style="flex: 1; min-width: 200px;">
+              <label style="font-size: 1.2rem;">Precio (Zeni)</label>
+              <input type="number" step="0.01" name="price" value="{{ product.price ?? '' }}" required style="width: 100%; padding: 12px; border: 3px solid #000; font-family: var(--font-body); margin-top: 5px; font-size: 1.1rem;">
+            </div>
+            <div style="flex: 1; min-width: 200px;">
+              <label style="font-size: 1.2rem;">Stock</label>
+              <input type="number" name="stock" value="{{ product.stock ?? '' }}" required style="width: 100%; padding: 12px; border: 3px solid #000; font-family: var(--font-body); margin-top: 5px; font-size: 1.1rem;">
+            </div>
+          </div>
+          
+          <div>
+            <label style="font-size: 1.2rem;">Categoría</label>
+            <select name="category_id" required style="width: 100%; padding: 12px; border: 3px solid #000; font-family: var(--font-body); margin-top: 5px; font-size: 1.1rem; font-weight: bold;">
+              <option value="">Selecciona una categoría...</option>
+              {% for cat in categories %}
+                <option value="{{ cat.id }}" {% if product and product.categoryId == cat.id %}selected{% endif %}>{{ cat.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          
+          <div>
+            <label style="font-size: 1.2rem;">URL Imagen</label>
+            <input type="url" name="image_url" value="{{ product.imageUrl ?? '' }}" placeholder="https://..." style="width: 100%; padding: 12px; border: 3px solid #000; font-family: var(--font-body); margin-top: 5px; font-size: 1.1rem;">
+          </div>
+          
+          <div style="margin-top: 1rem;">
+            <button type="submit" class="btn-comic btn-comic--green" style="color: #fff; width: 100%; padding: 15px; font-size: 1.5rem; cursor: pointer; text-shadow: 2px 2px 0 #000;">
+              💾 GUARDAR
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+    </main>
+</div>
+{% endblock %}

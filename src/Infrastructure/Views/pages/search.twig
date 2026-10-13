@@ -1,0 +1,32 @@
+{% extends 'layouts/base.twig' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<section class="section search-page" id="search-page">
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">
+        Resultados para: <span class="gradient-text">"{{ query }}"</span>
+      </h1>
+      <p class="page-subtitle">{{ products|length }} resultado(s)</p>
+    </div>
+
+    <div class="products-grid" id="products-grid">
+      {% if products is empty %}
+        <div class="empty-state">
+          <p>😔 No se encontraron productos para "{{ query }}".</p>
+          <a href="/catalogo" class="btn btn--primary">Ver catálogo completo</a>
+        </div>
+      {% else %}
+        {% for product in products %}
+          {% include 'components/product-card.twig' with { product: product } %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="/assets/js/pages/catalog.js"></script>
+{% endblock %}

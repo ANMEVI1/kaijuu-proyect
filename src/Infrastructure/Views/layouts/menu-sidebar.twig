@@ -1,0 +1,54 @@
+<!-- Menu Sidebar -->
+<div class="bolsa-modal" id="menu-sidebar" role="dialog" aria-modal="true" aria-label="Menu Z">
+  <div class="bolsa-content" style="max-width: 400px; margin-left: auto; margin-right: 0; height: 100vh; border-right: none; border-top: none; border-bottom: none;">
+    <button class="bolsa-close" id="menu-close-btn" aria-label="Cerrar menú">✕</button>
+    
+    <div class="bolsa-header">
+      <h2 class="bolsa-title" style="font-size: 3rem;">MENU Z</h2>
+    </div>
+
+    <div class="bolsa-items" style="padding: 1rem;">
+      <div style="display:flex; flex-direction:column; gap: 1rem;">
+        
+        <a href="/catalogo" class="btn-comic" style="text-align:center; font-size:1.5rem; padding:0.8rem;">
+          <span>📦 CATÁLOGO</span>
+        </a>
+        <a href="/monedero" class="btn-comic btn-comic--yellow" style="text-align:center; font-size:1.5rem; padding:0.8rem; color:#000;">
+          <span>🪙 MONEDERO ZEN</span>
+        </a>
+        
+        <hr style="border: 2px solid var(--clr-border); margin: 0.5rem 0;">
+        
+        <a href="/catalogo" class="btn-comic" style="background:var(--clr-white); color:var(--clr-border); text-shadow:none; text-align:center; font-size:1.2rem; padding:0.8rem;">
+          <span>✨ Recomendaciones para ti</span>
+        </a>
+        
+        <button id="btn-open-profile" class="btn-comic" style="background:var(--clr-cyan); width: 100%; font-size:1.5rem; padding:0.8rem;">
+          <span>👤 MI CUENTA</span>
+        </button>
+        <a href="/catalogo" class="btn-comic" style="background:var(--clr-yellow); color:var(--clr-border); text-shadow:none; text-align:center; font-size:1.5rem; padding:0.8rem;">
+          <span>⭐ FAVORITOS</span>
+        </a>
+        
+        <hr style="border: 2px solid var(--clr-border); margin: 0.5rem 0;">
+
+        <!-- Elementos condicionales de Auth -->
+        <div id="menu-auth-logged-out">
+          <button id="btn-open-login" class="btn-comic" style="background:var(--clr-blue); color:var(--clr-white); width: 100%; font-size:1.5rem; padding:0.8rem;">
+            <span>🔑 INICIAR SESIÓN</span>
+          </button>
+        </div>
+
+        <div id="menu-auth-logged-in" style="display: none; flex-direction: column; gap: 1rem;">
+          <p style="text-align:center; font-family:var(--font-comic); font-size:1.5rem; color:var(--clr-white); text-shadow: 2px 2px 0 #000;">
+            Hola, <span id="auth-user-email" style="color:var(--clr-yellow);"></span>
+          </p>
+          <button id="btn-logout" class="btn-comic" style="background:var(--clr-red); width: 100%; font-size:1.5rem; padding:0.8rem;">
+            <span>🛑 CERRAR SESIÓN</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

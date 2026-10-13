@@ -1,0 +1,61 @@
+table_name,column_name,data_type,description,is_primary_key,is_foreign_key,reference_table,reference_column
+users,id,uuid,"Usuario único, generado por Supabase",true,false,,
+users,email,text,"Correo electrónico del usuario",false,false,,
+users,hashed_password,text,"Hash de la contraseña",false,false,,
+users,role,text,"rol del usuario (admin, customer)",false,false,,
+users,created_at,timestamp,"Fecha y hora de creación",false,false,,
+products,id,uuid,"ID único del producto",true,false,,
+products,name,text,"Nombre del producto",false,false,,
+products,slug,text,"Slug URL amigable",false,false,,
+products,description,text,"Descripción completa del producto",false,false,,
+products,price,numeric,"Precio del producto (USD)",false,false,,
+products,image_url,text,"URL de la imagen del producto",false,false,,
+products,category_id,uuid,"Referencia a la categoría",false,true,categories,id
+products,stock,integer,"Cantidad disponible en inventario",false,false,,
+products,created_at,timestamp,"Fecha de alta del producto",false,false,,
+categories,id,uuid,"ID único de la categoría",true,false,,
+categories,name,text,"Nombre de la categoría",false,false,,
+categories,slug,text,"Slug URL de la categoría",false,false,,
+orders,id,uuid,"ID del pedido",true,false,,
+orders,user_id,uuid,"Referencia al usuario que realizó el pedido",false,true,users,id
+orders,status,text,"Estado del pedido (pendiente, pagado, preparando, enviado, entregado, cancelado, devuelto)",false,false,,
+orders,total,numeric,"Monto total del pedido",false,false,,
+orders,created_at,timestamp,"Fecha de creación del pedido",false,false,,
+order_items,id,uuid,"ID del ítem del pedido",true,false,,
+order_items,order_id,uuid,"Referencia al pedido",false,true,orders,id
+order_items,product_id,uuid,"Referencia al producto",false,true,products,id
+order_items,quantity,integer,"Cantidad del producto en el pedido",false,false,,
+order_items,price_at_purchase,numeric,"Precio del producto en el momento de la compra",false,false,,
+inventory_movements,id,uuid,"ID del movimiento de inventario",true,false,,
+inventory_movements,product_id,uuid,"Referencia al producto",false,true,products,id
+inventory_movements,type,text,"Tipo de movimiento (entrada, salida)",false,false,,
+inventory_movements,quantity,integer,"Cantidad afectada",false,false,,
+inventory_movements,reason,text,"Motivo del movimiento (compra, devolución, ajuste…)",false,false,,
+inventory_movements,created_at,timestamp,"Fecha del movimiento",false,false,,
+favorites,id,uuid,"ID del registro de favorito",true,false,,
+favorites,user_id,uuid,"Referencia al usuario",false,true,users,id
+favorites,product_id,uuid,"Referencia al producto",false,true,products,id
+reviews,id,uuid,"ID de la reseña",true,false,,
+reviews,user_id,uuid,"Referencia al usuario",false,true,users,id
+reviews,product_id,uuid,"Referencia al producto",false,true,products,id
+reviews,rating,integer,"Calificación de 1 a 5 estrellas",false,false,,
+reviews,comment,text,"Comentario del usuario",false,false,,
+reviews,created_at,timestamp,"Fecha de la reseña",false,false,,
+coupons,id,uuid,"ID del cupón",true,false,,
+coupons,code,text,"Código del cupón",false,false,,
+coupons,discount_type,text,"Tipo (porcentaje, monto fijo)",false,false,,
+coupons,value,numeric,"Valor del descuento",false,false,,
+coupons,valid_until,date,"Fecha de expiración",false,false,,
+coupons,usage_limit,integer,"Límite de usos del cupón",false,false,,
+shipping,id,uuid,"ID del envío",true,false,,
+shipping,order_id,uuid,"Referencia al pedido",false,true,orders,id
+shipping,address,text,"Dirección de entrega",false,false,,
+shipping,carrier,text,"Transportista (ej. DHL, FedEx)",false,false,,
+shipping,tracking_code,text,"Código de seguimiento",false,false,,
+shipping,status,text,"Estado del envío (pendiente, en tránsito, entregado)",false,false,,
+shipping,estimated_delivery,date,"Fecha estimada de entrega",false,false,,
+analytics,id,uuid,"ID del evento analítico",true,false,,
+analytics,event,text,"Tipo de evento (view, click, purchase…)",false,false,,
+analytics,user_id,uuid,"Referencia opcional al usuario",false,true,users,id
+analytics,payload,jsonb,"Datos del evento en formato JSON",false,false,,
+analytics,created_at,timestamp,"Marca temporal del evento",false,false,,

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="{% block meta_description %}KAIJUU STORE — Tu tienda de anime y cultura geek.{% endblock %}"/>
+  <title>{% block title %}KAIJUU STORE{% endblock %}</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@700;900&display=swap" rel="stylesheet"/>
+
+  <!-- CSS global -->
+  <link rel="stylesheet" href="/assets/css/main.css"/>
+
+  {% block head %}{% endblock %}
+</head>
+<body class="kaijuu-body">
+
+  <!-- NAVBAR -->
+  {% include 'layouts/navbar.twig' %}
+
+  <!-- MAIN CONTENT -->
+  <main id="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- FOOTER -->
+  {% include 'layouts/footer.twig' %}
+
+  <!-- Cart sidebar / Modal -->
+  {% include 'layouts/cart-sidebar.twig' %}
+
+  <!-- Menu Sidebar -->
+  {% include 'layouts/menu-sidebar.twig' %}
+
+  <!-- Auth Modal -->
+  {% include 'layouts/auth-modal.twig' %}
+
+  <!-- Profile Modal -->
+  {% include 'layouts/profile-modal.twig' %}
+
+  <!-- Anime.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <!-- App JS -->
+  <script src="/assets/js/app.js" type="module"></script>
+  <!-- Auth JS -->
+  <script src="/assets/js/auth.js" type="module"></script>
+  <!-- Profile JS -->
+  <script src="/assets/js/profile.js" type="module"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

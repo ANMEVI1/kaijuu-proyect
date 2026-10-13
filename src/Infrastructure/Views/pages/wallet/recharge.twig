@@ -1,0 +1,90 @@
+{% extends 'layouts/base.twig' %}
+
+{% block content %}
+<div style="max-width: 1100px; margin: 2rem auto; padding: 2rem;">
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; background: var(--clr-white); border: 4px solid #000; box-shadow: 8px 8px 0 rgba(0,0,0,0.8); padding: 1.5rem; margin-bottom: 2rem; transform: skewX(-1deg);">
+        <h1 style="font-family: var(--font-comic); font-size: 2.8rem; margin: 0; color: #000; text-shadow: 2px 2px 0 var(--clr-cyan);">⚡ RECARGAR ZEN ⚡</h1>
+        <a href="/monedero" class="btn-comic" style="background: var(--clr-yellow); color: #000; text-decoration: none; font-size: 1.2rem;">VOLVER AL MONEDERO</a>
+    </div>
+
+    {% if rate %}
+    <div style="background: #000; color: var(--clr-yellow); padding: 12px 24px; display: inline-block; border: 3px solid var(--clr-cyan); font-family: var(--font-comic); font-size: 1.3rem; margin-bottom: 2rem; transform: skewX(-4deg); box-shadow: 4px 4px 0 var(--clr-red);">
+        💎 TIPO DE CAMBIO: 1 ZEN = S/ <span id="zen-rate" data-rate="{{ rate.rate }}">{{ rate.rate|number_format(2) }}</span> PEN
+    </div>
+    {% endif %}
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+        {% for pkg in packages %}
+            <div style="background: var(--clr-white); border: 4px solid #000; box-shadow: 6px 6px 0 rgba(0,0,0,0.8); position: relative; display: flex; flex-direction: column; transform: skewX(-1deg); {% if pkg.isFeatured %}border-color: var(--clr-red); box-shadow: 8px 8px 0 var(--clr-red); transform: scale(1.03) skewX(-1deg); z-index: 10;{% endif %}">
+                
+                {% if pkg.isFeatured %}
+                    <div style="position: absolute; top: -18px; right: -15px; background: var(--clr-yellow); color: #000; border: 3px solid #000; padding: 6px 14px; font-family: var(--font-comic); font-size: 1.1rem; font-weight: bold; transform: rotate(8deg); box-shadow: 3px 3px 0 #000;">
+                        🔥 MÁS POPULAR
+                    </div>
+                {% endif %}
+                
+                <div style="background: #000; color: #fff; padding: 1.2rem; text-align: center; border-bottom: 4px solid #000;">
+                    <h3 style="font-family: var(--font-comic); font-size: 1.8rem; margin: 0; color: var(--clr-cyan); text-shadow: 2px 2px 0 var(--clr-red);">{{ pkg.name }}</h3>
+                </div>
+                
+                <div style="padding: 1.8rem; text-align: center; flex-grow: 1;">
+                    <div style="font-family: var(--font-comic); font-size: 3.5rem; color: #000; line-height: 1; margin-bottom: 10px; text-shadow: 2px 2px 0 var(--clr-yellow);">
+                        {{ pkg.zenAmount|number_format(0) }} <span style="font-size: 1.6rem; color: var(--clr-red);">ZEN</span>
+                    </div>
+                    {% if pkg.bonusZen > 0 %}
+                        <div style="background: var(--clr-green); color: #000; border: 2px solid #000; display: inline-block; padding: 4px 10px; font-family: var(--font-comic); font-weight: bold; font-size: 1.1rem; margin-bottom: 12px; transform: rotate(-2deg);">
+                            🎁 + {{ pkg.bonusZen|number_format(0) }} ZEN GRATIS!
+                        </div>
+                    {% endif %}
+                    
+                    <div style="font-family: var(--font-comic); font-size: 1.8rem; font-weight: bold; margin-top: 1rem; color: #000;">
+                        S/ {{ pkg.pricePen|number_format(2) }}
+                    </div>
+                </div>
+                
+                <div style="padding: 1.2rem; border-top: 4px solid #000; background: #fafafa;">
+                    <form method="POST" action="/monedero/recargar">
+                        <input type="hidden" name="package_id" value="{{ pkg.id }}">
+                        
+                        <div style="margin-bottom: 1rem; text-align: left;">
+                            <label style="font-family: var(--font-comic); font-size: 0.95rem; font-weight: bold; display: block; margin-bottom: 6px;">MÉTODO DE PAGO:</label>
+                            <div style="display: flex; gap: 10px;">
+                                <label style="flex: 1; border: 2px solid #000; padding: 6px; text-align: center; font-family: var(--font-comic); font-size: 0.9rem; cursor: pointer; background: #fff;">
+                                    <input type="radio" name="payment_method" value="paypal" checked style="margin-right: 4px;"> PayPal
+                                </label>
+                                <label style="flex: 1; border: 2px solid #000; padding: 6px; text-align: center; font-family: var(--font-comic); font-size: 0.9rem; cursor: pointer; background: #fff;">
+                                    <input type="radio" name="payment_method" value="mercadopago" style="margin-right: 4px;"> MercadoPago
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-comic btn-comic--green" style="width: 100%; font-size: 1.3rem; cursor: pointer; text-transform: uppercase;">⚡ RECARGAR AHORA</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Calculadora Manual -->
+    <div style="background: var(--clr-white); border: 4px solid #000; padding: 2rem; display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; box-shadow: 8px 8px 0 rgba(0,0,0,0.8); transform: skewX(-1deg);">
+        <div style="flex: 1; min-width: 250px;">
+            <h3 style="font-family: var(--font-comic); font-size: 2rem; margin-top: 0; color: #000;">🧮 CALCULADORA DE ZEN</h3>
+            <p style="font-family: var(--font-body); font-weight: bold; font-size: 1.1rem; color: #333;">Calcula la cantidad exacta de ZEN que obtendrás según el monto en Soles.</p>
+        </div>
+        <div style="flex: 1; min-width: 280px; display: flex; gap: 1rem; align-items: center;">
+            <div style="flex: 1;">
+                <label style="display: block; font-family: var(--font-comic); font-size: 1.1rem; font-weight: bold; margin-bottom: 5px;">Soles (S/)</label>
+                <input type="number" id="input-soles" min="0" step="0.5" placeholder="Ej: 50" style="width: 100%; padding: 12px; border: 3px solid #000; font-size: 1.3rem; font-family: var(--font-comic); font-weight: bold; background: #fff;">
+            </div>
+            <div style="font-size: 2.2rem; transform: skewX(-5deg);">⚡</div>
+            <div style="flex: 1; text-align: center; background: #000; color: var(--clr-yellow); padding: 12px; border: 3px solid #000; box-shadow: 4px 4px 0 var(--clr-cyan);">
+                <label style="display: block; font-size: 0.9rem; font-family: var(--font-comic); color: #fff;">OBTIENES:</label>
+                <span id="output-zen" style="font-family: var(--font-comic); font-size: 1.8rem;">0 ZEN</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="/assets/js/pages/wallet.js"></script>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'layouts/base.twig' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<section class="section product-detail-page" id="product-detail">
+  <div class="container">
+    {% if product %}
+    <div class="product-detail__grid" id="product-detail-grid">
+
+      <!-- Imagen -->
+      <div class="product-detail__image-wrap" id="product-image-wrap">
+        <img
+          src="{{ product.imageUrl }}"
+          alt="{{ product.name }}"
+          class="product-detail__image"
+          loading="lazy"
+        />
+        {% if product.stock <= 0 %}
+          <span class="badge badge--out">Sin Stock</span>
+        {% endif %}
+      </div>
+
+      <!-- Info -->
+      <div class="product-detail__info" id="product-info">
+        <p class="product-detail__category">{{ categoryName ?? product.categoryId }}</p>
+        <h1 class="product-detail__name">{{ product.name }}</h1>
+        <p class="product-detail__price gradient-text">{{ product.price|number_format(2) }} ZEN</p>
+        <div class="product-detail__stock">
+          {% if product.stock > 0 %}
+            <span class="badge badge--in">✔ En stock ({{ product.stock }} disponibles)</span>
+          {% else %}
+            <span class="badge badge--out">✘ Agotado</span>
+          {% endif %}
+        </div>
+        <p class="product-detail__desc">{{ product.description }}</p>
+
+        <!-- Cantidad + Agregar al carrito -->
+        <div class="product-detail__actions">
+          <div class="qty-selector">
+            <button class="qty-btn" id="qty-minus" aria-label="Disminuir cantidad">−</button>
+            <span class="qty-value" id="qty-value">1</span>
+            <button class="qty-btn" id="qty-plus" aria-label="Aumentar cantidad">+</button>
+          </div>
+          <button
+            class="btn btn--primary btn--lg"
+            id="add-to-cart-btn"
+            data-id="{{ product.id }}"
+            data-name="{{ product.name }}"
+            data-price="{{ product.price }}"
+            data-image="{{ product.imageUrl }}"
+            {% if product.stock <= 0 %}disabled{% endif %}
+          >
+            🛒 Agregar al Carrito
+          </button>
+        </div>
+      </div>
+
+    </div>
+    {% else %}
+      <div class="empty-state">
+        <p>😶 Producto no encontrado.</p>
+        <a href="/catalogo" class="btn btn--primary">Volver al catálogo</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="/assets/js/pages/product-detail.js"></script>
+{% endblock %}

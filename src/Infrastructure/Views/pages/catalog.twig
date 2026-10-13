@@ -1,0 +1,41 @@
+{% extends 'layouts/base.twig' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<section class="section catalog-page" id="catalog-page">
+  <div class="container">
+    <!-- Header -->
+    <div class="page-header" id="catalog-header">
+      <h1 class="page-title">Catálogo <span class="gradient-text">Completo</span></h1>
+      <p class="page-subtitle">{{ products|length }} productos disponibles</p>
+    </div>
+
+    <!-- Filtros -->
+    <div class="catalog-filters" id="catalog-filters">
+      <a href="/catalogo" class="filter-chip filter-chip--active">Todos</a>
+      <a href="/categoria/ropa" class="filter-chip">👕 Ropa</a>
+      <a href="/categoria/figuras" class="filter-chip">🗿 Figuras</a>
+      <a href="/categoria/accesorios" class="filter-chip">⌚ Accesorios</a>
+      <a href="/categoria/coleccionables" class="filter-chip">✨ Coleccionables</a>
+    </div>
+
+    <!-- Grid -->
+    <div class="products-grid" id="products-grid">
+      {% if products is empty %}
+        <div class="empty-state">
+          <p>😶 No se encontraron productos.</p>
+          <a href="/catalogo" class="btn btn--primary">Ver todo el catálogo</a>
+        </div>
+      {% else %}
+        {% for product in products %}
+          {% include 'components/product-card.twig' with { product: product } %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="/assets/js/pages/catalog.js"></script>
+{% endblock %}
